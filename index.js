@@ -18,7 +18,7 @@ function getLastTweet(callback) {
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (error) callback(error); 
         var tweet = tweets[0];
-
+        var prefix; 
         var hasMedia = tweet.entities.media.length > 0; 
         var hasUrl = tweet.entities.urls.length > 0; 
 
