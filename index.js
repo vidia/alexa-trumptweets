@@ -1,10 +1,5 @@
 /* eslint-disable  func-names */
 /* eslint quote-props: ["error", "consistent"]*/
-/**
-* This sample demonstrates a simple skill built with the Amazon Alexa Skills
-* nodejs skill development kit.
-**/
-
 'use strict';
 
 const Alexa = require('alexa-sdk');
@@ -23,17 +18,12 @@ function getLastTweet(callback) {
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (error) callback(error); 
         var tweet = tweets[0];
-        var prefix = "This tweet has some "; 
 
         var hasMedia = tweet.entities.media.length > 0; 
         var hasUrl = tweet.entities.urls.length > 0; 
 
-        if(hasMedia && hasUrl) {
-            prefix = "This tweet has some media and a url in it. ";
-        } else if (hasMedia) {
-            prefix = "There is some media to this tweet. ";
-        } else if(hasUrl) {
-            prefix = "There is a link in this tweet";
+        if(hasUrl) {
+            prefix = "There is a link in this tweet. ";
         }
 
         var finalResponse = ""; 
@@ -41,8 +31,11 @@ function getLastTweet(callback) {
             finalResponse = prefix; 
         }
 
+        //Process the tweet so that things like links arent read aloud unnecessarily. 
         var rawTweet = tweet.text; 
         var processedTweet = rawTweet; 
+
+        //Replace the videos with a verbal comment and title. 
         if(hasMedia) {
             for(var i = 0; i < tweet.entities.media.length; i++) {
                 processedTweet = processedTweet.replace(tweet.entities.media[i].url, '<emphasis level="reduced"> There is a video here titled ' + tweet.extended_entities.media[i].additional_media_info.title + '</emphasis>');
