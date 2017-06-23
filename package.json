@@ -1,0 +1,22 @@
+{
+  "name": "TrumpTweetsAlexa",
+  "version": "1.0.0",
+  "description": "An amazon Alexa enabled Trump Tweet reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trump",
+    "tweets",
+    "twitter",
+    "alexa"
+  ],
+  "author": "David Tschida",
+  "license": "MIT",
+  "dependencies": {
+    "twitter": "*",
+    "alexa-sdk": "^1.0.10",
+    "aws": "0.0.3-2"
+  }
+}
