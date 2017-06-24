@@ -49,10 +49,10 @@ function getLastTweet(callback) {
 }
 
 // Some debug statements for running it locally to test things. 
-getLastTweet(function(err, tweet) {
-    if(err) throw err;
-    console.log(tweet);
-});
+// getLastTweet(function(err, tweet) {
+//     if(err) throw err;
+//     console.log(tweet);
+// });
 
 const handlers = {
     'GetLastTweetIntent': function () {
