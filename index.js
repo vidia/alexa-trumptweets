@@ -16,11 +16,11 @@ function getLastTweet(callback) {
         exclude_replies: true,
     };
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (error) callback(error); 
+        if (error) return callback(error); 
         var tweet = tweets[0];
-        var prefix; 
-        var hasMedia = tweet.entities.media.length > 0; 
-        var hasUrl = tweet.entities.urls.length > 0; 
+        var prefix = ""; 
+        var hasMedia = tweet.entities.media && tweet.entities.media.length > 0; 
+        var hasUrl = tweet.entities.urls && tweet.entities.urls.length > 0; 
 
         if(hasUrl) {
             prefix = "There is a link in this tweet. ";
@@ -49,10 +49,10 @@ function getLastTweet(callback) {
 }
 
 // Some debug statements for running it locally to test things. 
-// getLastTweet(function(err, tweet) {
-//     if(err) throw err;
-//     console.log(tweet);
-// });
+getLastTweet(function(err, tweet) {
+    if(err) throw err;
+    console.log(tweet);
+});
 
 const handlers = {
     'GetLastTweetIntent': function () {
